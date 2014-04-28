@@ -1,24 +1,23 @@
 package oms.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import oms.model.Greeting;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+@Controller("GreetingController")
+@RequestMapping("/oms/greetings")
 public class GreetingController {
 
     private static final String TEMPLATE = "Hello, %s!";
 
-    @RequestMapping("/greeting")
+    @RequestMapping("/hello")
     @ResponseBody
-    public HttpEntity<Greeting> greeting(
+    public Greeting greeting(
             @RequestParam(value = "name", required = false, defaultValue = "World") String name) {
     	
     	System.out.println("\n\n\nTESTE");
@@ -26,6 +25,6 @@ public class GreetingController {
         Greeting greeting = new Greeting(String.format(TEMPLATE, name));
         greeting.add(linkTo(methodOn(GreetingController.class).greeting(name)).withSelfRel());
 
-        return new ResponseEntity<Greeting>(greeting, HttpStatus.OK);
+        return greeting;
     }
 }

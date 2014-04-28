@@ -1,2 +1,10 @@
-/bin
-/target
+bin/
+target/
+*.class
+
+.classpath
+.project
+.settings
+.pmd
+.checkstyle
+.metadata

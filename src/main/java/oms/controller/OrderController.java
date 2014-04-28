@@ -11,37 +11,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-@Controller
+@Controller("orderController")
+@RequestMapping("/oms/orders")
 public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
 	
-    @RequestMapping(value="/orders",  method= RequestMethod.GET)
+    @RequestMapping(method= RequestMethod.GET)
     @ResponseBody
     public String getOrders() {
     	return "teste";
     }
 
-    @RequestMapping(value="/orders",  method= RequestMethod.POST)
+    @RequestMapping(method= RequestMethod.POST)
     @ResponseBody
     public Order purchase(Order order) {
     	return orderService.purchase(order); 
     }
     
-    @RequestMapping(value="/orders",  method= RequestMethod.PUT)
+    @RequestMapping(method= RequestMethod.PUT)
     @ResponseBody
     public Order update(Order order) {
     	return orderService.update(order); 
     }
     
-    @RequestMapping(value="/orders",  method= RequestMethod.DELETE)
+    @RequestMapping(method= RequestMethod.DELETE)
     @ResponseBody
     public void delete(Long orderId) {
     	orderService.delete(orderId);
     }
     
-    @RequestMapping(value="/orders/{orderId}/cancel",  method= RequestMethod.PUT)
+    @RequestMapping(value="/{orderId}/cancel",  method= RequestMethod.PUT)
     @ResponseBody
     public Order cancel(@PathVariable("orderId") Long orderId) {
     	return orderService.cancel(orderId);
