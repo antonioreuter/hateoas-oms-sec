@@ -1,5 +1,6 @@
 spring-hateoas-oms
 ==================
 
-Código para o artigo da Java Magazine 
+Código para o artigo da Java Magazine
+
 spring-hateoas-oms
