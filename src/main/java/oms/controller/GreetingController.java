@@ -4,19 +4,17 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import oms.model.Greeting;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller("GreetingController")
+@RestController
 @RequestMapping("/oms/greetings")
 public class GreetingController {
 
     private static final String TEMPLATE = "Hello, %s!";
 
     @RequestMapping("/hello")
-    @ResponseBody
     public Greeting greeting(
             @RequestParam(value = "name", required = false, defaultValue = "World") String name) {
     	
