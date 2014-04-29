@@ -8,7 +8,7 @@ public interface OrderService {
 	
 	Set<Order> getAll();
 	
-	Order get();
+	Order get(Long orderId);
 	
 	Order purchase(Order order);
 	
