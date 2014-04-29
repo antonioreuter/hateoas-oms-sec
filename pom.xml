@@ -29,7 +29,7 @@
     </dependencies>
 
     <properties>
-        <start-class>oms.Application</start-class>
+        <start-class>oms.app.Application</start-class>
     </properties>
 
     <build>
