@@ -1,5 +1,10 @@
 package oms.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
+import java.util.List;
+
 import oms.model.Order;
 import oms.service.OrderService;
 
@@ -17,8 +22,16 @@ public class OrderController {
 	private OrderService orderService;
 	
     @RequestMapping(method= RequestMethod.GET)
-    public String getOrders() {
-    	return "teste";
+    public List<Order> getOrders() {
+    	return orderService.getAll();
+    }
+    
+    @RequestMapping("/{orderId}")
+    public Order get(@PathVariable Long orderId) {
+    	Order order = orderService.get(orderId);
+    	order.add(linkTo(methodOn(OrderController.class).get(orderId)).withSelfRel());
+    	
+    	return order;
     }
 
     @RequestMapping(method= RequestMethod.POST)

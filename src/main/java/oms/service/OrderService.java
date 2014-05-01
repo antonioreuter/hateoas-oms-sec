@@ -1,12 +1,12 @@
 package oms.service;
 
-import java.util.Set;
+import java.util.List;
 
 import oms.model.Order;
 
 public interface OrderService {
 	
-	Set<Order> getAll();
+	List<Order> getAll();
 	
 	Order get(Long orderId);
 	

@@ -2,15 +2,20 @@ package oms.model;
 
 import org.springframework.hateoas.ResourceSupport;
 
-public class Customer extends ResourceSupport{
-	
+public class Customer extends ResourceSupport {
+
 	private Long customerId;
-	
+
 	private String name;
-	
+
 	private String document;
-	
+
 	private Address address;
+
+	public Customer(Long customerId, String name) {
+		this.setCustomerId(customerId);
+		this.setName(name);
+	}
 
 	public Long getCustomerId() {
 		return customerId;
@@ -27,23 +32,4 @@ public class Customer extends ResourceSupport{
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getDocument() {
-		return document;
-	}
-
-	public void setDocument(String document) {
-		this.document = document;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	
-	
-
 }

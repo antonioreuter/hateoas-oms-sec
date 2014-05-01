@@ -2,6 +2,6 @@ package oms.model;
 
 public enum PaymentType {
 
-	VOUCHER, CREDIT_CARD, MONEY_ORDER
+	GIFT_CARD, CREDIT_CART, DEBIT_CART;
 	
 }

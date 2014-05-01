@@ -1,13 +1,13 @@
 package oms.model;
 
-import java.sql.Date;
-import java.util.LinkedHashSet;
+import java.util.Date;
 import java.util.Set;
 
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.util.CollectionUtils;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class Order extends ResourceSupport{
+import org.springframework.hateoas.ResourceSupport;
+
+public class Order extends ResourceSupport {
 	
 	private Long orderId;
 	
@@ -15,66 +15,27 @@ public class Order extends ResourceSupport{
 	
 	private Set<Payment> payments;
 	
-	private Set<Delivery> deliveries;
+	private Set<Item> items;
 	
 	private Date createdAt;
 	
 	private OrderStatus status;
 
-	public Long getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Long orderId) {
+	public Order(Long orderId, Customer customer) {
 		this.orderId = orderId;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
 		this.customer = customer;
-	}
-
-	public Set<Payment> getPayments() {
-		return payments;
-	}
-
-	public void addPayment(Payment payment) {
-		if (CollectionUtils.isEmpty(this.payments)) {
-			this.payments = new LinkedHashSet<Payment>();
-		}
-		this.payments.add(payment);
-	}
-
-	public Set<Delivery> getDeliveries() {
-		return deliveries;
-	}
-
-	public void addDeliveries(Delivery delivery) {
-		if (CollectionUtils.isEmpty(this.deliveries)) {
-			this.deliveries = new LinkedHashSet<Delivery>();
-		}
-		this.deliveries.add(delivery);
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public OrderStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(OrderStatus status) {
-		this.status = status;
+		this.createdAt = new Date();
 	}
 	
-	
+	public void cancel() {
+		this.status = OrderStatus.CANCELED;
+	}
 
+	public Long getOrderId() {
+		return this.orderId;
+	}
+	
+	public Customer getCustomer() {
+		return this.customer;
+	}
 }

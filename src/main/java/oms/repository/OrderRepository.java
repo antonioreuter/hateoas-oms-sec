@@ -1,12 +1,12 @@
 package oms.repository;
 
-import java.util.Set;
+import java.util.List;
 
 import oms.model.Order;
 
 public interface OrderRepository {
 	
-	Set<Order> findAll();
+	List<Order> findAll();
 	
 	Order find(Long orderId);
 	

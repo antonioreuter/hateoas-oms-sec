@@ -1,25 +1,32 @@
 package oms.repository.impl;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
+import oms.model.Customer;
 import oms.model.Order;
 import oms.repository.OrderRepository;
 
 import org.springframework.stereotype.Repository;
 
-@Repository("orderRepository")
+@Repository
 public class OrderRepositoryImpl implements OrderRepository {
+	private static final Map<Long, Order> orders = new HashMap<Long, Order>();
 
 	@Override
-	public Set<Order> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> findAll() {
+		System.out.println(this);
+		System.out.println(orders.size());
+		return new ArrayList<Order>(OrderRepositoryImpl.orders.values());
 	}
 
 	@Override
 	public Order find(Long orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		return orders.get(orderId);
 	}
 
 	@Override
@@ -29,7 +36,15 @@ public class OrderRepositoryImpl implements OrderRepository {
 	}
 
 	public void delete(Long orderId) {
-		
+
 	}
-	
+
+	@PostConstruct
+	public void loadDataset() {
+		Order order = new Order(1L, new Customer(1L, "João Carlos"));
+		OrderRepositoryImpl.orders.put(order.getOrderId(), order);
+		
+		order = new Order(2L, new Customer(2L, "Adriana Alves"));
+		OrderRepositoryImpl.orders.put(order.getOrderId(), order);
+	}
 }

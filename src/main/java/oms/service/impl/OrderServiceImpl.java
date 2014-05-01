@@ -1,9 +1,8 @@
 package oms.service.impl;
 
-import java.util.Set;
+import java.util.List;
 
 import oms.model.Order;
-import oms.model.OrderStatus;
 import oms.repository.OrderRepository;
 import oms.service.OrderService;
 
@@ -17,14 +16,16 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepository;
 
 	@Override
-	public Set<Order> getAll() {
-		// TODO Auto-generated method stub
+	public List<Order> getAll() {
+		List<Order> orders = orderRepository.findAll();
+		for (Order order : orders) {
+			System.out.println(order.getOrderId());
+		}
 		return orderRepository.findAll();
 	}
 
 	@Override
 	public Order get(Long orderId) {
-		// TODO Auto-generated method stub
 		return orderRepository.find(orderId);
 	}
 
@@ -42,17 +43,14 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order cancel(Long orderId) {
-		Order order = get(orderId);
-		order.setStatus(OrderStatus.CANCELED);
+		Order pedido = get(orderId);
+		pedido.cancel();
 		
-		return orderRepository.save(order);
+		return orderRepository.save(pedido);
 	}
 
 	@Override
 	public void delete(Long orderId) {
 		orderRepository.delete(orderId);
 	}
-	
-	
-
 }
