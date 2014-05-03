@@ -3,11 +3,7 @@ package oms.model;
 import java.util.Date;
 import java.util.Set;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.springframework.hateoas.ResourceSupport;
-
-public class Order extends ResourceSupport {
+public class Order {
 	
 	private Long orderId;
 	

@@ -1,8 +1,7 @@
 package oms.model;
 
-import org.springframework.hateoas.ResourceSupport;
 
-public class Customer extends ResourceSupport {
+public class Customer {
 
 	private Long customerId;
 
