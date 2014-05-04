@@ -17,10 +17,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> getAll() {
-		List<Order> orders = orderRepository.findAll();
-		for (Order order : orders) {
-			System.out.println(order.getOrderId());
-		}
 		return orderRepository.findAll();
 	}
 
@@ -31,13 +27,11 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order purchase(Order order) {
-		// TODO Auto-generated method stub
 		return orderRepository.save(order);
 	}
 
 	@Override
 	public Order update(Order order) {
-		// TODO Auto-generated method stub
 		return orderRepository.save(order);
 	}
 

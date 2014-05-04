@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
-import oms.model.Customer;
 import oms.model.Order;
 import oms.repository.OrderRepository;
 
@@ -19,9 +16,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public List<Order> findAll() {
-		System.out.println(this);
-		System.out.println(orders.size());
-		return new ArrayList<Order>(OrderRepositoryImpl.orders.values());
+		return new ArrayList<Order>(orders.values());
 	}
 
 	@Override
@@ -31,20 +26,11 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 	@Override
 	public Order save(Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		orders.put(order.getId(), order);
+		return order;
 	}
 
 	public void delete(Long orderId) {
-
-	}
-
-	@PostConstruct
-	public void loadDataset() {
-		Order order = new Order(1L, new Customer(1L, "João Carlos"));
-		OrderRepositoryImpl.orders.put(order.getOrderId(), order);
-		
-		order = new Order(2L, new Customer(2L, "Adriana Alves"));
-		OrderRepositoryImpl.orders.put(order.getOrderId(), order);
+		orders.remove(orderId);
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Order {
 	
-	private Long orderId;
+	private Long id;
 	
 	private Customer customer;
 	
@@ -17,9 +17,10 @@ public class Order {
 	
 	private OrderStatus status;
 
-	public Order(Long orderId, Customer customer) {
-		this.orderId = orderId;
+	public Order(Long id, Customer customer) {
+		this.id = id;
 		this.customer = customer;
+		this.status = OrderStatus.WAITING_FOR_PAYMENT;
 		this.createdAt = new Date();
 	}
 	
@@ -27,11 +28,23 @@ public class Order {
 		this.status = OrderStatus.CANCELED;
 	}
 
-	public Long getOrderId() {
-		return this.orderId;
-	}
-	
 	public Customer getCustomer() {
 		return this.customer;
+	}
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public boolean isCanceled() {
+		return this.status == OrderStatus.CANCELED;
+	}
+
+	public Date getCreatedAt() {
+		return this.createdAt;
+	}
+
+	public OrderStatus getStatus() {
+		return this.status;
 	}
 }
