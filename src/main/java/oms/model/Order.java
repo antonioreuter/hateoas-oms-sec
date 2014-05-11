@@ -1,6 +1,7 @@
 package oms.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -23,6 +24,8 @@ public class Order implements Serializable {
 	private Date createdAt = new Date();
 
 	private OrderStatus status = OrderStatus.WAITING_FOR_PAYMENT;
+	
+	private BigDecimal value = BigDecimal.ZERO;
 
 	public Order() {
 	}
@@ -49,6 +52,14 @@ public class Order implements Serializable {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	
+	public BigDecimal getValue() {
+		return this.value;
+	}
+	
+	public void setValue(BigDecimal value) {
+		this.value = value;
 	}
 
 	public Set<Payment> getPayments() {
