@@ -105,7 +105,7 @@ public class OmsInitializer {
 	private void loadCustomers() {
 		Customer customer1 = new Customer();
 		customer1.setId(1L);
-		customer1.setName("Jhon Doe");
+		customer1.setName("John Doe");
 		customer1.setDocument("084093284");
 		Address address1 = new Address("Av. Paulista", "278", "04049993", "", "Sao Paulo");
 		address1.setId(1L);
