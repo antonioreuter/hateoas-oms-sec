@@ -2,9 +2,9 @@ package oms.controller;
 
 import java.util.List;
 
+import oms.assembler.OrderResourceAssembler;
 import oms.model.Order;
-import oms.model.OrderResource;
-import oms.model.OrderResourceAssembler;
+import oms.resource.OrderResource;
 import oms.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class OrderController {
     
     @RequestMapping(method= RequestMethod.PUT)
     public Order update(Order order) {
-    	return orderService.update(order); 
+    	return orderService.save(order); 
     }
     
     @RequestMapping(method= RequestMethod.DELETE)

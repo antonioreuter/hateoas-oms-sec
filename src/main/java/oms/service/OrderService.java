@@ -12,7 +12,7 @@ public interface OrderService {
 	
 	Order purchase(Order order);
 	
-	Order update(Order order);
+	Order save(Order order);
 	
 	Order cancel(Long orderId);
 	

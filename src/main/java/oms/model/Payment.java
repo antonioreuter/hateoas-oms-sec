@@ -1,8 +1,15 @@
 package oms.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
-public class Payment {
+public class Payment implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	
@@ -10,7 +17,18 @@ public class Payment {
 	
 	private BigDecimal price;
 	
-	private PaymentStatus status;
+	private PaymentStatus status = PaymentStatus.WAITING;
+	
+	private Date createdAt = new Date();
+	
+	public Payment() {
+		
+	}
+	
+	public Payment(PaymentType type, BigDecimal price) {
+		this.setType(type);
+		this.setPrice(price);
+	}
 
 	public Long getId() {
 		return id;
@@ -43,5 +61,15 @@ public class Payment {
 	public void setStatus(PaymentStatus status) {
 		this.status = status;
 	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	
+	
 	
 }

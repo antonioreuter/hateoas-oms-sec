@@ -1,35 +1,32 @@
-package oms.model;
+package oms.resource;
 
 import java.util.Date;
+
+import oms.model.Order;
+import oms.model.OrderStatus;
 
 import org.springframework.hateoas.ResourceSupport;
 
 public class OrderResource extends ResourceSupport {
 	private Long orderId;
-	private Customer customer;
 	private Date createdAt;
-	private OrderStatus status;
+	private String status;
 
 	public Long getOrderId() {
 		return orderId;
-	}
-
-	public Customer getCustomer() {
-		return customer;
 	}
 
 	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public OrderStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 	
 	public void copyAttributesFrom(Order order) {
 		this.orderId = order.getId();
-		this.customer = order.getCustomer();
 		this.createdAt = order.getCreatedAt();
-		this.status = order.getStatus();
+		this.status = order.getStatus().toString();
 	}
 }
