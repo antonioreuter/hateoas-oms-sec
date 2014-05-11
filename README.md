@@ -22,6 +22,8 @@ ou
 
 # Serviços disponíveis
 
-http://localhost:8080/hateoas-oms/orders
+[GET] /hateoas-oms/orders
+[GET] /hateoas-oms/orders/{id}
+[PUT] /hateoas-oms/orders/{id}/cancel
 
 TODO: completar lista de serviços.
