@@ -13,6 +13,8 @@ public class Payment implements Serializable{
 
 	private Long id;
 	
+	private Long orderId;
+	
 	private PaymentType type;
 	
 	private BigDecimal price;
@@ -25,7 +27,9 @@ public class Payment implements Serializable{
 		
 	}
 	
-	public Payment(PaymentType type, BigDecimal price) {
+	public Payment(Long id, Long orderId, PaymentType type, BigDecimal price) {
+		this.setId(id);
+		this.setOrderId(orderId);
 		this.setType(type);
 		this.setPrice(price);
 	}
@@ -68,6 +72,14 @@ public class Payment implements Serializable{
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 	
 	

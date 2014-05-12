@@ -2,7 +2,8 @@ package oms.controller;
 
 import java.util.List;
 
-import oms.model.Item;
+import oms.assembler.ItemResourceAssembler;
+import oms.resource.ItemResource;
 import oms.service.ItemService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,16 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
+	@Autowired
+	private ItemResourceAssembler itemResourceAssembler;
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ItemResource get(@PathVariable("id") Long id) {
+		return itemResourceAssembler.toResource(itemService.get(id));
+	}
 	
 	@RequestMapping(value="/order/{orderId}", method=RequestMethod.GET)
-	public List<Item> getByOrder(@PathVariable("orderId") Long orderId) {
-		return itemService.getByOrder(orderId);
+	public List<ItemResource> getByOrder(@PathVariable("orderId") Long orderId) {
+		return itemResourceAssembler.toResources(itemService.getByOrder(orderId));
 	}
 }

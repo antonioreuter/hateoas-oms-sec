@@ -16,12 +16,15 @@ public class Item implements Serializable {
 
 	private int quantity;
 	
+	private Long orderId;
+	
 	public Item() {
 		
 	}
 	
-	public Item(Long id, Product product, int quantity) {
+	public Item(Long id, Long orderId, Product product, int quantity) {
 		this.setId(id);
+		this.setOrderId(orderId);
 		this.setProduct(product);
 		this.setQuantity(quantity);
 	}
@@ -54,6 +57,14 @@ public class Item implements Serializable {
 		if (this.product == null)
 			return BigDecimal.ZERO;
 		return this.product.getPrice().multiply(BigDecimal.valueOf(quantity));
+	}
+
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}	
 	
 }

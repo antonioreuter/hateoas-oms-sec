@@ -10,6 +10,8 @@ public interface OrderService {
 	
 	Order get(Long orderId);
 	
+	List<Order> getByCustomer(Long customerId);
+	
 	Order purchase(Order order);
 	
 	Order save(Order order);

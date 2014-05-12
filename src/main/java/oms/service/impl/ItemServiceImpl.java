@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import oms.model.Item;
-import oms.model.Order;
-import oms.repository.OrderRepository;
+import oms.repository.ItemRepository;
 import oms.service.ItemService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,33 +12,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 @Service
-public class ItemServiceImpl implements ItemService{
-
+public class ItemServiceImpl implements ItemService{	
 	
 	
 	@Autowired
-	private OrderRepository orderRepository;
-
+	private ItemRepository itemRepository;
 	
-
-	
+	public Item get(Long id) {
+		return itemRepository.find(id);
+	}
 
 	@Override
 	public List<Item> getByOrder(Long id) {
-		List<Item> items = new ArrayList<Item> ();
+		List<Item> result = new ArrayList<Item> ();
 		
-		List<Order> orders = orderRepository.findAll();
-		if (!CollectionUtils.isEmpty(orders)) {
-			for (Order order : orders) {
-				if (order.getId() == id) {
-					items.addAll(order.getItems());
+		List<Item> items = itemRepository.findAll();
+		if (!CollectionUtils.isEmpty(items)) {
+			for (Item item : items) {
+				if (item.getOrderId() == id) {
+					result.add(item);
 				}
 			}
 		}
 
-		return items;
+		return result;
 	}
-
 	
 
 }

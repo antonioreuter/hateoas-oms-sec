@@ -1,5 +1,6 @@
 package oms.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import oms.model.Order;
@@ -14,10 +15,24 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	private OrderRepository orderRepository;
-
+	
 	@Override
 	public List<Order> getAll() {
 		return orderRepository.findAll();
+	}
+	
+	@Override
+	public List<Order> getByCustomer(Long customerId) {
+		List<Order> result = new ArrayList<Order>();
+		
+		List<Order> orders = orderRepository.findAll();
+		for (Order order : orders) {
+			if (order.getCustomer().getId() == customerId) {
+				result.add(order);
+			}
+		}
+		
+		return result;
 	}
 
 	@Override

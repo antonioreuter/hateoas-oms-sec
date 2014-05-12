@@ -2,7 +2,8 @@ package oms.controller;
 
 import java.util.List;
 
-import oms.model.Customer;
+import oms.assembler.CustomerResourceAssembler;
+import oms.resource.CustomerResource;
 import oms.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,17 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
+	@Autowired
+	private CustomerResourceAssembler customerResourceAssembler;
+	
 	@RequestMapping(method= RequestMethod.GET)
-	public List<Customer> get() {
-		return customerService.getAll();
+	public List<CustomerResource> get() {
+		return customerResourceAssembler.toResources(customerService.getAll());
 	}
 	
 	@RequestMapping(value="/order/{orderId}", method=RequestMethod.GET)
-	public Customer getByOrder(@PathVariable("orderId") Long orderId) {
-		return customerService.getByOrder(orderId);
+	public CustomerResource getByOrder(@PathVariable("orderId") Long orderId) {
+		return customerResourceAssembler.toResource(customerService.getByOrder(orderId));
 	}
 	
 }

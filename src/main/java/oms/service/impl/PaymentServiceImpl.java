@@ -3,9 +3,7 @@ package oms.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import oms.model.Order;
 import oms.model.Payment;
-import oms.repository.OrderRepository;
 import oms.repository.PaymentRepository;
 import oms.service.PaymentService;
 
@@ -19,9 +17,6 @@ public class PaymentServiceImpl implements PaymentService{
 	@Autowired
 	private PaymentRepository paymentRepository;
 	
-	@Autowired
-	private OrderRepository orderRepository;
-
 	@Override
 	public List<Payment> getAll() {
 		return paymentRepository.findAll();
@@ -34,21 +29,20 @@ public class PaymentServiceImpl implements PaymentService{
 
 	@Override
 	public List<Payment> getByOrder(Long id) {
-		List<Payment> payments = new ArrayList<Payment>();
+		List<Payment> result = new ArrayList<Payment>();
 		
-		List<Order> orders = orderRepository.findAll();
-		if (!CollectionUtils.isEmpty(orders)) {
-			for (Order order : orders) {
-				if (order.getId() == id) {
-					payments.addAll(order.getPayments()); 
-					
+		List<Payment> payments = paymentRepository.findAll();
+		if (!CollectionUtils.isEmpty(payments)) {
+			for (Payment payment : payments) {
+				if (payment.getOrderId() == id) {
+					result.add(payment);
 				}
 			}
 		}
 
-		return payments;
+		return result;
 	}
-
+	
 	@Override
 	public Payment save(Payment payment) {
 		return paymentRepository.save(payment);
@@ -59,5 +53,4 @@ public class PaymentServiceImpl implements PaymentService{
 	public void delete(Long id) {
 		paymentRepository.delete(id);
 	}
-	
 }

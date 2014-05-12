@@ -28,6 +28,14 @@ public class OrderController {
     	List<Order> orders = orderService.getAll();
     	return orderResourceAssembler.toResources(orders);
     }
+    
+    @RequestMapping(value="/customer/{customerId}", method= RequestMethod.GET)
+    public List<OrderResource> getOrdersByCustomer(@PathVariable("customerId") Long customerId) {
+    	List<Order> orders = orderService.getByCustomer(customerId);
+    	return orderResourceAssembler.toResources(orders);
+    }
+    
+    
 
     @RequestMapping("/{orderId}")
     public OrderResource get(@PathVariable Long orderId) {
@@ -50,7 +58,7 @@ public class OrderController {
     	orderService.delete(orderId);
     }
     
-    @RequestMapping(value="/{orderId}/cancel",  method= RequestMethod.PUT)
+    @RequestMapping(value="/{orderId}/cancel",  method= RequestMethod.DELETE)
     public OrderResource cancel(@PathVariable("orderId") Long orderId) {
     	Order canceledOrder = orderService.cancel(orderId);
     	return orderResourceAssembler.toResource(canceledOrder);
