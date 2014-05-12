@@ -1,5 +1,6 @@
 package oms.resource;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import oms.model.Order;
@@ -10,23 +11,33 @@ public class OrderResource extends ResourceSupport {
 	private Long orderId;
 	private Date createdAt;
 	private String status;
-	
+
+	private BigDecimal value;
+
+
 	public Long getOrderId() {
-		return orderId;
+		return this.orderId;
 	}
 
 	public Date getCreatedAt() {
-		return createdAt;
+		return this.createdAt;
 	}
 
 	public String getStatus() {
-		return status;
+		return this.status;
+	}
+	
+	public BigDecimal getValue() {
+		return this.value;
 	}
 	
 	
 	public void copyAttributesFrom(Order order) {
 		this.orderId = order.getId();
 		this.createdAt = order.getCreatedAt();
-		this.status = order.getStatus().toString(); 
+
+		this.status = order.getStatus().toString();
+		this.value = order.getValue();
+
 	}
 }

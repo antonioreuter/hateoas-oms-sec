@@ -30,7 +30,7 @@ public class OrderResourceAssembler extends ResourceAssemblerSupport<Order, Orde
 		
 		
 		if (!order.isCanceled()) {
-			orderResource.add(linkTo(methodOn(OrderController.class).cancel(order.getId())).withRel("cancel"));
+			orderResource.add(linkTo(methodOn(OrderController.class).cancel(order.getId())).withRel("Order Cancelation"));
 		}
 		
 		orderResource.add(linkTo(methodOn(CustomerController.class).getByOrder(order.getId())).withRel("Customer Detail"));
