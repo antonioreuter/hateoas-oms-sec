@@ -83,7 +83,6 @@ public class OmsInitializer {
 		paymentRepository.save(payment1);
 		order1.addPayments(paymentRepository.find(1L));
 
-		
 		Payment payment2 = new Payment(2L, 1L, PaymentType.DEBIT_CARD, BigDecimal.valueOf(80.7D));
 		paymentRepository.save(payment2);
 		order1.addPayments(paymentRepository.find(2L));
@@ -110,7 +109,6 @@ public class OmsInitializer {
 		
 		order2.addItem(itemRepository.find(3L));
 		order2.addItem(itemRepository.find(4L));
-		
 
 		orderRepository.save(order2);
 	}

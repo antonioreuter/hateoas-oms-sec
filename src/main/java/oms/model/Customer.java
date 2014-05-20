@@ -1,6 +1,7 @@
 package oms.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class Customer implements Serializable{
@@ -17,6 +18,8 @@ public class Customer implements Serializable{
 	private String document;
 
 	private Address address;
+
+	private List<Order> orders;
 
 	public Long getId() {
 		return id;
@@ -49,8 +52,12 @@ public class Customer implements Serializable{
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
-	
 
-	
+	public List<Order> getOrders() {
+		return this.orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 }
