@@ -28,13 +28,11 @@ public class OrderResourceAssembler extends ResourceAssemblerSupport<Order, Orde
 	public OrderResource toResource(Order order) {
 		OrderResource orderResource = createResourceWithId(order.getId(), order);
 		orderResource.copyAttributesFrom(order);
-		
-		
+
 		if (!order.isCanceled()) {
 			orderResource.add(linkTo(methodOn(OrderController.class).cancel(order.getId())).withRel("Order Cancelation"));
 		}
-		
-		
+
 		Link customerLink = linkTo(CustomerController.class).slash("order").slash(order.getId()).withRel("Customer Detail");
 		orderResource.add(customerLink);
 		

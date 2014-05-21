@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService{
 		List<Order> orders = orderRepository.findAll();
 		if (!CollectionUtils.isEmpty(orders)) {
 			for (Order order : orders) {
-				if (order.getId() == id) {
+				if (order.getId().equals(id)) {
 					customer = order.getCustomer(); 
 					break;
 				}

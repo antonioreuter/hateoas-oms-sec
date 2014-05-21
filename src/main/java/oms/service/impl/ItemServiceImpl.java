@@ -29,7 +29,7 @@ public class ItemServiceImpl implements ItemService{
 		List<Item> items = itemRepository.findAll();
 		if (!CollectionUtils.isEmpty(items)) {
 			for (Item item : items) {
-				if (item.getOrderId() == id) {
+				if (item.getOrderId().equals(id)) {
 					result.add(item);
 				}
 			}

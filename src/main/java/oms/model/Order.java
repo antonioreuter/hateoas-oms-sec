@@ -29,6 +29,12 @@ public class Order implements Serializable {
 
 	public Order() {
 	}
+	
+	public Order(Long id, BigDecimal value, Customer customer) {
+		this.id = id;
+		this.value = value;
+		this.customer = customer;
+	}
 
 	public void cancel() {
 		this.status = OrderStatus.CANCELED;

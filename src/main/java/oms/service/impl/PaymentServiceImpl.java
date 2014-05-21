@@ -34,7 +34,7 @@ public class PaymentServiceImpl implements PaymentService{
 		List<Payment> payments = paymentRepository.findAll();
 		if (!CollectionUtils.isEmpty(payments)) {
 			for (Payment payment : payments) {
-				if (payment.getOrderId() == id) {
+				if (payment.getOrderId().equals(id)) {
 					result.add(payment);
 				}
 			}

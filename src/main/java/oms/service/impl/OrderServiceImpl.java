@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		List<Order> orders = orderRepository.findAll();
 		for (Order order : orders) {
-			if (order.getCustomer().getId() == customerId) {
+			if (order.getCustomer().getId().equals(customerId)) {
 				result.add(order);
 			}
 		}
