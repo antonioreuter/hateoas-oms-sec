@@ -36,8 +36,8 @@ public class OrderResourceAssembler extends ResourceAssemblerSupport<Order, Orde
 		Link customerLink = linkTo(CustomerController.class).slash("order").slash(order.getId()).withRel("Customer Detail");
 		orderResource.add(customerLink);
 		
-		orderResource.add(linkTo(methodOn(PaymentController.class).getByOrder(order.getId())).withRel("Payment Details"));
-		orderResource.add(linkTo(methodOn(ItemController.class).getByOrder(order.getId())).withRel("Items"));
+		orderResource.add(linkTo(methodOn(PaymentController.class).paymentsByOrder(order.getId())).withRel("Payment Details"));
+		orderResource.add(linkTo(methodOn(ItemController.class).itemsByOrder(order.getId())).withRel("Items"));
 		
 
 		

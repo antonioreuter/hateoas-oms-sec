@@ -3,7 +3,6 @@ package oms.assembler;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import oms.controller.CustomerController;
-import oms.controller.OrderController;
 import oms.model.Customer;
 import oms.resource.CustomerResource;
 
@@ -24,7 +23,7 @@ public class CustomerResourceAssembler extends ResourceAssemblerSupport<Customer
 		CustomerResource resource = createResourceWithId(customer.getId(), customer);
 		resource.copyAttributesFrom(customer);
 		
-		resource.add(linkTo(methodOn(OrderController.class).getOrdersByCustomer(customer.getId())).withRel("My Orders"));
+		resource.add(linkTo(methodOn(CustomerController.class).orders(customer.getId())).withRel("My Orders"));
 		
 		return resource;
 	}

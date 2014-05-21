@@ -18,17 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemController {
 	@Autowired
 	private ItemService itemService;
-	
+
 	@Autowired
 	private ItemResourceAssembler itemResourceAssembler;
-	
+
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ItemResource get(@PathVariable("id") Long id) {
+	public ItemResource item(@PathVariable("id") Long id) {
 		return itemResourceAssembler.toResource(itemService.get(id));
 	}
-	
-	@RequestMapping(value="/order/{orderId}", method=RequestMethod.GET)
-	public List<ItemResource> getByOrder(@PathVariable("orderId") Long orderId) {
+
+	@RequestMapping(value="/order/{order_id}", method=RequestMethod.GET)
+	public List<ItemResource> itemsByOrder(@PathVariable("order_id") Long orderId) {
 		return itemResourceAssembler.toResources(itemService.getByOrder(orderId));
 	}
 }
