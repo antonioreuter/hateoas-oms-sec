@@ -1,18 +1,21 @@
 package oms.assembler;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import oms.controller.ItemController;
-import oms.controller.OrderController;
 import oms.model.Item;
+import oms.model.Order;
 import oms.resource.ItemResource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ItemResourceAssembler extends ResourceAssemblerSupport<Item, ItemResource>{
 
+	@Autowired
+	private EntityLinks entityLinks;
 	
 	public ItemResourceAssembler() {
 		super(ItemController.class, ItemResource.class);
@@ -23,7 +26,9 @@ public class ItemResourceAssembler extends ResourceAssemblerSupport<Item, ItemRe
 		ItemResource resource = createResourceWithId(item.getId(), item);
 		resource.copyAttributesFrom(item);
 		
-		resource.add(linkTo(methodOn(OrderController.class).get(item.getOrderId())).withRel("Order"));
+		Long orderId = item.getOrderId();
+		Link orderLink = entityLinks.linkToSingleResource(Order.class, orderId).withRel("Order");
+		resource.add(orderLink);
 		
 		return resource;
 	}

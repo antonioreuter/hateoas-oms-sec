@@ -8,6 +8,7 @@ import oms.resource.OrderResource;
 import oms.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/orders")
+@ExposesResourceFor(Order.class)
+
 public class OrderController {
 	
 	@Autowired
@@ -35,8 +38,6 @@ public class OrderController {
     	return orderResourceAssembler.toResources(orders);
     }
     
-    
-
     @RequestMapping("/{orderId}")
     public OrderResource get(@PathVariable Long orderId) {
     	Order order = orderService.get(orderId);

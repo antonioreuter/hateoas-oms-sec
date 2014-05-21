@@ -3,6 +3,7 @@ package oms.controller;
 import java.util.List;
 
 import oms.assembler.CustomerResourceAssembler;
+import oms.model.Customer;
 import oms.resource.CustomerResource;
 import oms.service.CustomerService;
 
@@ -23,9 +24,16 @@ public class CustomerController {
 	private CustomerResourceAssembler customerResourceAssembler;
 	
 	@RequestMapping(method= RequestMethod.GET)
-	public List<CustomerResource> get() {
+	public List<CustomerResource> customers() {
 		return customerResourceAssembler.toResources(customerService.getAll());
 	}
+	
+	@RequestMapping(value="/{id}", method= RequestMethod.GET)
+	public CustomerResource customer(@PathVariable("id") Long customerId) {
+		Customer customer = customerService.get(customerId);
+		return customerResourceAssembler.toResource(customer);
+	}
+	
 	
 	@RequestMapping(value="/order/{orderId}", method=RequestMethod.GET)
 	public CustomerResource getByOrder(@PathVariable("orderId") Long orderId) {

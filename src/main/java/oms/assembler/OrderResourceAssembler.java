@@ -10,6 +10,7 @@ import oms.model.Order;
 import oms.resource.OrderResource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,10 @@ public class OrderResourceAssembler extends ResourceAssemblerSupport<Order, Orde
 			orderResource.add(linkTo(methodOn(OrderController.class).cancel(order.getId())).withRel("Order Cancelation"));
 		}
 		
-		orderResource.add(linkTo(methodOn(CustomerController.class).getByOrder(order.getId())).withRel("Customer Detail"));
+		
+		Link customerLink = linkTo(CustomerController.class).slash("order").slash(order.getId()).withRel("Customer Detail");
+		orderResource.add(customerLink);
+		
 		orderResource.add(linkTo(methodOn(PaymentController.class).getByOrder(order.getId())).withRel("Payment Details"));
 		orderResource.add(linkTo(methodOn(ItemController.class).getByOrder(order.getId())).withRel("Items"));
 		

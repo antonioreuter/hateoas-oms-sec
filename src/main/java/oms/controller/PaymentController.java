@@ -3,10 +3,12 @@ package oms.controller;
 import java.util.List;
 
 import oms.assembler.PaymentResourceAssembler;
+import oms.model.Payment;
 import oms.resource.PaymentResource;
 import oms.service.PaymentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityLinks;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/payments")
 public class PaymentController {
+	
+	@Autowired 
+	private EntityLinks entityLinks;
 
 	@Autowired
 	private PaymentService paymentService;
@@ -30,7 +35,10 @@ public class PaymentController {
 	
 	@RequestMapping(value="/{id}",method= RequestMethod.GET)
 	public PaymentResource get(@PathVariable("id") Long id) {
-		return paymentResourceAssembler.toResource(paymentService.get(id));
+		Payment payment = paymentService.get(id);
+		PaymentResource resource = paymentResourceAssembler.toResource(payment);
+		
+		return resource;
 	}
 	
 	@RequestMapping(value="/order/{orderId}", method=RequestMethod.GET)
