@@ -3,9 +3,14 @@ package oms.controller;
 import java.util.List;
 
 import oms.assembler.CustomerResourceAssembler;
+import oms.assembler.ItemResourceAssembler;
 import oms.assembler.OrderResourceAssembler;
+import oms.assembler.PaymentResourceAssembler;
 import oms.model.Order;
+import oms.resource.CustomerResource;
+import oms.resource.ItemResource;
 import oms.resource.OrderResource;
+import oms.resource.PaymentResource;
 import oms.service.CustomerService;
 import oms.service.OrderService;
 
@@ -35,6 +40,12 @@ public class OrderController {
 
 	@Autowired
 	private CustomerResourceAssembler customerResourceAssembler;
+
+    @Autowired
+    private PaymentResourceAssembler paymentResourceAssembler;
+    
+    @Autowired
+    private ItemResourceAssembler itemResourceAssembler;
 
     @RequestMapping(method= RequestMethod.GET)
 	@ResponseBody
@@ -70,10 +81,29 @@ public class OrderController {
     	orderService.delete(orderId);
     }
 
-    @RequestMapping(value="/{order_id}/cancel",  method= RequestMethod.DELETE)
+    @RequestMapping(value="/{order_id}/cancel", method= RequestMethod.DELETE)
 	@ResponseBody
     public OrderResource cancel(@PathVariable("order_id") Long orderId) {
     	Order canceledOrder = orderService.cancel(orderId);
     	return orderResourceAssembler.toResource(canceledOrder);
     }
+    
+    @RequestMapping(value="/{order_id}/customer", method= RequestMethod.GET)
+	@ResponseBody
+    public CustomerResource customer(@PathVariable("order_id") Long orderId) {
+    	return customerResourceAssembler.toResource(orderService.get(orderId).getCustomer());
+    }
+
+    @RequestMapping(value="/{order_id}/payments", method= RequestMethod.GET)
+    @ResponseBody
+    public List<PaymentResource> payments(@PathVariable("order_id") Long orderId) {
+        return paymentResourceAssembler.toResources(orderService.get(orderId).getPayments());
+    }
+    
+    @RequestMapping(value="/{order_id}/items", method= RequestMethod.GET)
+    @ResponseBody
+    public List<ItemResource> items(@PathVariable("order_id") Long orderId) {
+        return itemResourceAssembler.toResources(orderService.get(orderId).getItems());
+    }
+
 }
