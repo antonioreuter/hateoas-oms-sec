@@ -2,7 +2,7 @@
 
 Código para o artigo da Java Magazine.
 
-O objetivo desse projeto é demonstrar o conceito e o uso do Spring Hateoas. Para facilitar a configuração da aplicação é utilizado o Spring Boot.
+O objetivo desse projeto é demonstrar como tornar sua API segura utilizando Spring Security. O intuito é demonstrar ao leitor um passo a passo mostrando as armadilhas que podemos encontrar ao tentar blindar nossa aplicação. Para facilitar a configuração da aplicação é utilizado o Spring Boot.
 
 Esse projeto utiliza a ferramenta [Gradle](http://www.gradle.org/) para compilar e executar a aplicação. Assim, é necessário que somente o Java 6 ou maior esteja instalado, as demais dependências serão baixadas da Internet.
 
