@@ -1,6 +1,6 @@
 package oms.assembler;
 
-import oms.controller.ItemController;
+import oms.controller.api.ItemController;
 import oms.model.Item;
 import oms.model.Order;
 import oms.resource.ItemResource;

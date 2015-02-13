@@ -1,6 +1,6 @@
 package oms.assembler;
 
-import oms.controller.PaymentController;
+import oms.controller.api.PaymentController;
 import oms.model.Order;
 import oms.model.Payment;
 import oms.resource.PaymentResource;

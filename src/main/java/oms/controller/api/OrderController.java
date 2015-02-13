@@ -1,4 +1,4 @@
-package oms.controller;
+package oms.controller.api;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api/orders")
 @ExposesResourceFor(Order.class)
 
 public class OrderController {

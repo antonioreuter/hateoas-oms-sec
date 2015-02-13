@@ -2,7 +2,7 @@ package oms.assembler;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-import oms.controller.CustomerController;
+import oms.controller.api.CustomerController;
 import oms.model.Customer;
 import oms.resource.CustomerResource;
 

@@ -1,13 +1,16 @@
 package oms.model.api;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 
 @Entity
@@ -21,12 +24,24 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="user_id")
 	private Long id;
 	
+	@Column(unique=true, nullable=false, name="user_name")
 	private String name;
+	
+	@Column(unique=true, nullable=false)
 	private String login;
+	
 	private String password;
+	
+	@Column(unique=true, nullable=false)
 	private String email;
+	
+	private boolean enabled = true;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Role> roles;
 	
 	public Long getId() {
 		return id;
@@ -58,5 +73,17 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}	
 }

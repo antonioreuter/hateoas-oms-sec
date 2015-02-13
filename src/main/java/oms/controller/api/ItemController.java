@@ -1,4 +1,4 @@
-package oms.controller;
+package oms.controller.api;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 public class ItemController {
 	@Autowired
 	private ItemService itemService;
