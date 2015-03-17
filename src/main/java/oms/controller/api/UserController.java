@@ -3,11 +3,13 @@ package oms.controller.api;
 import java.util.List;
 
 import oms.assembler.UserResourceAssembler;
+import oms.model.api.User;
 import oms.resource.UserResource;
 import oms.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,6 +35,14 @@ public class UserController {
 	@ResponseBody
 	public List<UserResource> findAll() {
 		return userResourceAssembler.toResources(userService.findAll());
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="/admin")
+	@ResponseBody
+	public UserResource createAdmin(@RequestBody User user) {
+		user = userService.createAdmin(user);
+		
+		return userResourceAssembler.toResource(user);
 	}
 	
 }

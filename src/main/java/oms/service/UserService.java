@@ -13,5 +13,11 @@ public interface UserService {
 	User findByLoginAndPassword(String login, String password);
 	
 	User findById(Long id);
+	
+	User createUser(User user);
+	
+	User createSeller(User user);
+	
+	User createAdmin(User user);
 
 }

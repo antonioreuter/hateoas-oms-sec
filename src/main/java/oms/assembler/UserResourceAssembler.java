@@ -16,6 +16,10 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
 	
 	@Override
 	public UserResource toResource(User user) {
+		if (user == null) {
+			throw new IllegalArgumentException("Usuário não informado!");
+		}
+		
 		UserResource resource = createResourceWithId(user.getId(), user);
 		resource.copyAttributesFrom(user);
 		

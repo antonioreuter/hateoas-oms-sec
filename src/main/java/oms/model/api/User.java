@@ -3,16 +3,22 @@ package oms.model.api;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonInclude(Include.NON_NULL)
 @Entity
 @Table(name="users")
 public class User implements Serializable {
@@ -21,7 +27,8 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2189287730503492457L;
-
+	
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
@@ -40,8 +47,9 @@ public class User implements Serializable {
 	
 	private boolean enabled = true;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade={CascadeType.PERSIST})
 	private Set<Role> roles;
+	
 	
 	public Long getId() {
 		return id;

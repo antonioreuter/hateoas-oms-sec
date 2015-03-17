@@ -13,9 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 
-
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonInclude(Include.NON_NULL)
 @Entity
 @Table(name="roles")
 public class Role implements Serializable {
@@ -29,7 +33,6 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
@@ -37,7 +40,16 @@ public class Role implements Serializable {
 
 	@Column(nullable=false)
 	private String role;
+	
+	public Role() {
+		
+	}
 
+	public Role(String role, User user) {
+		this.setRole(role);
+		this.setUser(user);
+	}
+	
 	public Long getId() {
 		return id;
 	}

@@ -12,6 +12,7 @@ import oms.service.CustomerService;
 import oms.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,6 +60,12 @@ public class CustomerController {
 	@ResponseBody
 	public CustomerResource customerByOrder(@PathVariable("order_id") Long orderId) {
 		return customerResourceAssembler.toResource(customerService.getByOrder(orderId));
+	}
+	
+	@Secured(value="ROLE_ADMIN")
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public void delete(@PathVariable("customer_id") Long customerId) {
+		System.out.println("Deletando o customer "+customerId);
 	}
 
 }

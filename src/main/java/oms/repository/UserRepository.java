@@ -5,10 +5,13 @@ import java.util.Set;
 import oms.model.api.User;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 
 public interface UserRepository  extends CrudRepository<User, Long>{
+	
+	User findById(Long id);
+	
+	User findByLogin(String login);
 
 	User findByEmail(String email);
 	
